@@ -1,0 +1,21 @@
+<?php
+
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\LayananController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\LaporanController;
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/', function () {
+    return view('dashboard');
+});
+
+Route::resource('pelanggan', PelangganController::class);
+Route::resource('layanan', LayananController::class);
+Route::resource('transaksi', TransaksiController::class);
+Route::resource('laporan', LaporanController::class);
