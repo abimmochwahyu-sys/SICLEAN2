@@ -19,3 +19,5 @@ Route::resource('pelanggan', PelangganController::class);
 Route::resource('layanan', LayananController::class);
 Route::resource('transaksi', TransaksiController::class);
 Route::resource('laporan', LaporanController::class);
+
+

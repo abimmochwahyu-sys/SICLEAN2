@@ -13,8 +13,8 @@ public function up(): void
 {
     Schema::create('layanans', function (Blueprint $table) {
         $table->id();
-        $table->string('nama_layanan');
-        $table->integer('harga');
+        $table->string('nama_pelanggan');
+        $table->string('jenis_layanan');
         $table->timestamps();
     });
 }

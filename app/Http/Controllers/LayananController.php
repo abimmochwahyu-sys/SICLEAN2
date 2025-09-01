@@ -23,33 +23,27 @@ public function create()
 
 public function store(Request $request)
 {
-    $request->validate([
-        'nama_layanan' => 'required',
-        'harga' => 'required|numeric',
-    ]);
     Layanan::create($request->all());
-    return redirect()->route('layanan.index')->with('success','Layanan berhasil ditambahkan');
+    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan.');
 }
 
-public function edit(Layanan $layanan)
+public function edit($id)
 {
+    $layanan = Layanan::findOrFail($id);
     return view('layanan.edit', compact('layanan'));
 }
 
-public function update(Request $request, Layanan $layanan)
+public function update(Request $request, $id)
 {
-    $request->validate([
-        'nama_layanan' => 'required',
-        'harga' => 'required|numeric',
-    ]);
+    $layanan = Layanan::findOrFail($id);
     $layanan->update($request->all());
-    return redirect()->route('layanan.index')->with('success','Layanan berhasil diupdate');
+    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diupdate.');
 }
 
-public function destroy(Layanan $layanan)
+public function destroy($id)
 {
+    $layanan = Layanan::findOrFail($id);
     $layanan->delete();
-    return redirect()->route('layanan.index')->with('success','Layanan berhasil dihapus');
+    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus.');
 }
-
 }
