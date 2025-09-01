@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Layanan;
+use App\Models\pelanggan;
 use Illuminate\Http\Request;
 
 class LayananController extends Controller
@@ -16,16 +17,26 @@ public function index()
 return view('layanan.index', compact('layanans'));
 }
 
+
 public function create()
 {
-    return view('layanan.create');
+    $pelanggans = Pelanggan::all(); // Ambil semua data pelanggan
+    return view('layanan.create', compact('pelanggans'));
 }
 
 public function store(Request $request)
 {
+    $request->validate([
+        'pelanggan_id' => 'required|exists:pelanggans,id',
+        'jenis_layanan' => 'required|in:Setrika,Laundry Kilat',
+        'estimasi_waktu' => 'required|integer|min:1',
+    ]);
+
     Layanan::create($request->all());
+
     return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan.');
 }
+
 
 public function edit($id)
 {
@@ -35,8 +46,19 @@ public function edit($id)
 
 public function update(Request $request, $id)
 {
-    $layanan = Layanan::findOrFail($id);
-    $layanan->update($request->all());
+    $request->validate([
+    'pelanggan_id' => 'required|exists:pelanggans,id',
+    'jenis_layanan' => 'required|in:Setrika,Laundry Kilat',
+    'estimasi_waktu' => 'required|integer|min:1',
+]);
+
+$layanan = Layanan::findOrFail($id);
+$layanan->update([
+    'pelanggan_id' => $request->pelanggan_id,
+    'jenis_layanan' => $request->jenis_layanan,
+    'estimasi_waktu' => $request->estimasi_waktu,
+]);
+
     return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diupdate.');
 }
 

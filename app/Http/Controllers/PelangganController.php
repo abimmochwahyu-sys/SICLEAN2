@@ -54,6 +54,8 @@ public function update(Request $request, Pelanggan $pelanggan)
                      ->with('success', 'Pelanggan berhasil diperbarui');
 }
 
+
+
 public function destroy(Pelanggan $pelanggan)
 {
     $pelanggan->delete();

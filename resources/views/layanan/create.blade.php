@@ -11,14 +11,25 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
-                    <input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control" required>
-                </div>
-
+    <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
+    <select name="nama_pelanggan" id="nama_pelanggan" class="form-control" required>
+        <option value="">-- Pilih Jenis Layanan --</option>
+        @foreach ($pelanggans as $pelanggan)
+            <option value="{{ $pelanggan->nama }}" {{ old('nama_pelanggan') == $pelanggan->nama ? 'selected' : '' }}>
+                {{ $pelanggan->nama }}
+            </option>
+        @endforeach
+    </select>
+</div>
                 <div class="mb-3">
                     <label for="jenis_layanan" class="form-label">Jenis Layanan</label>
-                    <input type="text" name="jenis_layanan" id="jenis_layanan" class="form-control" required>
+                    <select name="jenis_layanan" id="jenis_layanan" class="form-control" required>
+                    <option value="">-- Pilih Jenis Layanan --</option>
+                    <option value="Setrika">Setrika</option>
+                    <option value="Laundry Kilat">Laundry Kilat</option>
+                    </select>
                 </div>
+
 
                 <div class="mb-3">
                     <label for="estimasi_waktu" class="form-label">Estimasi Waktu (hari)</label>

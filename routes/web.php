@@ -26,4 +26,3 @@ Route::resource('laporan', LaporanController::class);
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-

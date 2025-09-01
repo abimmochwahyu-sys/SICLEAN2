@@ -21,7 +21,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nama Pelanggan</th>
-                        <th>Jenis Layanan</th>
+                        <th>Nama Layanan</th>
                         <th>Estimasi Waktu</th>
                         <th>Aksi</th>
                     </tr>
@@ -31,7 +31,8 @@
                     <tr>
                         <td>{{ $l->id }}</td>
                         <td>{{ $l->nama_pelanggan }}</td>
-                        <td>{{ $l->jenis_layanan }}</td>                        
+                        <td>{{ $l->nama_layanan }}</td>
+                       
                         <td>{{ $l->estimasi_waktu }} hari</td>
                         <td class="text-center">
                             <a href="{{ route('layanan.edit', $l->id) }}" class="btn btn-warning btn-sm">Edit</a>
