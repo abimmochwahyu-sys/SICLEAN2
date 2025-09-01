@@ -22,9 +22,8 @@ Route::resource('layanan', LayananController::class);
 Route::resource('transaksi', TransaksiController::class);
 Route::resource('laporan', LaporanController::class);
 
-<<<<<<< HEAD
 
-=======
+
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
->>>>>>> d3d84ff2e7aad1c3d5db5a2693cc90815b846bfb
+
