@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Laravel SB2</div>
+        <div class="sidebar-brand-text mx-3 mt-2"><h4><b>SICLEAN</b></h4></div>
     </a>
 
     <!-- Divider -->
