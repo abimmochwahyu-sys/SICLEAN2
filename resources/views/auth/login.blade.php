@@ -16,7 +16,7 @@
         }
         .left {
             width: 50%;
-            background: #3A5AFE;
+            background: #43475eff;
             color: white;
             display: flex;
             justify-content: center;
@@ -62,7 +62,7 @@
             z-index: 2;
         }
         .login-box h2 {
-            color: #3A5AFE;
+            color: #43475eff;
             margin-bottom: 20px;
             animation: dropIn 1s ease-out;
         }
@@ -75,14 +75,14 @@
             transition: all 0.3s ease;
         }
         .login-box input:focus {
-            border-color: #3A5AFE;
+            border-color: #43475eff;
             box-shadow: 0 0 8px rgba(58, 90, 254, 0.4);
             outline: none;
         }
         .login-box button {
             width: 100%;
             padding: 12px;
-            background: #3A5AFE;
+            background: #43475eff;
             border: none;
             border-radius: 8px;
             color: white;
@@ -92,7 +92,7 @@
             margin-top: 10px;
         }
         .login-box button:hover {
-            background: #2c47d6;
+            background: #43475eff;
             transform: scale(1.05);
             box-shadow: 0 6px 15px rgba(58, 90, 254, 0.4);
         }
@@ -123,7 +123,7 @@
     </div>
     <div class="right">
         <div class="login-box">
-            <h2>Login Account</h2>
+            <h2>WELCOME</h2>
             @if($errors->any())
                 <div class="error">{{ $errors->first() }}</div>
             @endif

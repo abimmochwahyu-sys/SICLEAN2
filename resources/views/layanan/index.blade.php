@@ -19,7 +19,7 @@
                         <th>ID</th>
                         <th>Nama Pelanggan</th>
                         <th>Jenis Layanan</th>
-                        <th>Harga/Kg (Rp)</th>
+                        <th>Harga/Kg (Rp.10.000)</th>
                         <th>Estimasi Waktu (hari)</th>
                         <th>Aksi</th>
                     </tr>

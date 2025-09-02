@@ -1,4 +1,4 @@
-<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
@@ -23,43 +23,14 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Master Data
+        Menu 
     </div>
-    
-    <!-- Nav Item - Pelanggan -->
-    <li class="nav-item {{ request()->is('pelanggan*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('pelanggan') }}">
-            <i class="fas fa-users"></i>
-            <span>Pelanggan</span></a>
-    </li>
     
     <!-- Nav Item - Layanan -->
     <li class="nav-item {{ request()->is('layanan*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('layanan') }}">
             <i class="fas fa-concierge-bell"></i>
             <span>Layanan</span></a>
-    </li>
-    
-    <!-- Nav Item - Transaksi -->
-    <li class="nav-item {{ request()->is('transaksi*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('transaksi') }}">
-            <i class="fas fa-exchange-alt"></i>
-            <span>Transaksi</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Laporan
-    </div>
-
-    <!-- Nav Item - Laporan -->
-    <li class="nav-item {{ request()->is('laporan*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('laporan') }}">
-            <i class="fas fa-file-alt"></i>
-            <span>Laporan</span></a>
     </li>
 
     <!-- Divider -->

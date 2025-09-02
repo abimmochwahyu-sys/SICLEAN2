@@ -13,21 +13,25 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'username' => ['required'],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->only('username', 'password');
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'));
+    if (Auth::attempt($credentials)) {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard')->with('success', 'Selamat datang Admin!');
+        } else {
+            return redirect()->route('user.dashboard')->with('success', 'Selamat datang User!');
         }
-
-        return back()->withErrors([
-            'username' => 'Username atau password salah.',
-        ])->withInput();
     }
+
+    return back()->withErrors([
+        'username' => 'Username atau password salah.',
+    ]);
+}
+
+
 
     public function logout(Request $request)
     {

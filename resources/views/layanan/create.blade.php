@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="mb-3">
-    <label for="harga_per_kilo" class="form-label">Harga per Kilo (Rp)</label>
+    <label for="harga_per_kilo" class="form-label">Harga per Kilo (Rp.10.000)</label>
     <input type="number" name="harga_per_kilo" id="harga_per_kilo" class="form-control" required>
 </div>
 
