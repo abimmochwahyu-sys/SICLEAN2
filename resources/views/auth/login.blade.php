@@ -22,12 +22,8 @@
             align-items: center;
             flex-direction: column;
         }
-        .left img {
-            width: 200px;
-        }
         .left h1 {
-            margin-top: 10px;
-            font-size: 28px;
+            font-size: 32px;
         }
         .right {
             width: 50%;
@@ -41,12 +37,6 @@
         }
         .login-box h2 {
             color: #8e44ad;
-            margin-bottom: 5px;
-        }
-        .login-box p {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 20px;
         }
         .login-box input {
             width: 100%;
@@ -55,54 +45,39 @@
             border-radius: 5px;
             border: 1px solid #ddd;
         }
-        .login-box .remember {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-        }
         .login-box button {
             width: 100%;
             padding: 10px;
+            background: linear-gradient(90deg, #a18cd1, #fbc2eb);
             border: none;
             border-radius: 5px;
-            background: linear-gradient(90deg, #a18cd1, #fbc2eb);
             color: white;
             font-size: 16px;
             cursor: pointer;
-            margin-top: 10px;
         }
-        .login-box a {
+        .error {
+            color: red;
             font-size: 14px;
-            color: #8e44ad;
-            text-decoration: none;
-        }
-        .login-box .footer {
-            text-align: center;
-            margin-top: 15px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="left">
-        {{-- <img src="{{ asset('images/logo.png') }}" alt="Logo"> --}}
         <h1>SICLEAN</h1>
     </div>
     <div class="right">
         <div class="login-box">
             <h2>Login Account</h2>
-            <p>Please enter your username and password.</p>
+            @if($errors->any())
+                <div class="error">{{ $errors->first() }}</div>
+            @endif
             <form method="POST" action="{{ route('login.post') }}">
                 @csrf
-                <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required>
+                <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required autofocus>
                 <input type="password" name="password" placeholder="Password" required>
-                {{-- <div class="remember">
-                    <input type="checkbox" name="remember"> Remember Me
-                </div> --}}
-                <button type="submit"><a href="../layanan">login</a></button>
+                <button type="submit">Login</button>
             </form>
-            {{-- <div class="footer">
-                <p>Belum punya akun? <a href="#">Daftar</a></p>
-            </div> --}}
         </div>
     </div>
 </body>

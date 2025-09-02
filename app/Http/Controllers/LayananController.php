@@ -3,69 +3,75 @@
 namespace App\Http\Controllers;
 
 use App\Models\Layanan;
-use App\Models\pelanggan;
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
 class LayananController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-public function index()
-{
-    $layanans = Layanan::latest()->paginate(10);
-return view('layanan.index', compact('layanans'));
-}
+    public function index()
+    {
+        $layanans = Layanan::paginate(10);
+        return view('layanan.index', compact('layanans'));
+    }
 
+    public function create()
+    {
+        $pelanggans = Pelanggan::all();
+        return view('layanan.create', compact('pelanggans'));
+    }
 
-public function create()
-{
-    $pelanggans = Pelanggan::all(); // Ambil semua data pelanggan
-    return view('layanan.create', compact('pelanggans'));
-}
-
-public function store(Request $request)
+    public function store(Request $request)
 {
     $request->validate([
-        'pelanggan_id' => 'required|exists:pelanggans,id',
-        'jenis_layanan' => 'required|in:Setrika,Laundry Kilat',
-        'estimasi_waktu' => 'required|integer|min:1',
+        'nama_pelanggan' => 'required|string',
+        'jenis_layanan' => 'required|string',
+        'harga_per_kilo' => 'required|integer',
+        'estimasi_waktu' => 'required|integer',
     ]);
 
-    Layanan::create($request->all());
+    Layanan::create([
+        'nama_pelanggan' => $request->nama_pelanggan,
+        'jenis_layanan' => $request->jenis_layanan,
+        'harga_per_kilo' => $request->harga_per_kilo,
+        'estimasi_waktu' => $request->estimasi_waktu,
+    ]);
 
-    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil ditambahkan.');
+    return redirect()->route('layanan.index')->with('success', 'Data layanan berhasil ditambahkan.');
 }
 
+// Form edit layanan
+    public function edit($id)
+    {
+        $layanan = Layanan::findOrFail($id);
+        $pelanggans = Pelanggan::all();
+        return view('layanan.edit', compact('layanan', 'pelanggans'));
+    }
 
-public function edit($id)
-{
-    $layanan = Layanan::findOrFail($id);
-    return view('layanan.edit', compact('layanan'));
-}
-
-public function update(Request $request, $id)
+public function update(Request $request, Layanan $layanan)
 {
     $request->validate([
-    'pelanggan_id' => 'required|exists:pelanggans,id',
-    'jenis_layanan' => 'required|in:Setrika,Laundry Kilat',
-    'estimasi_waktu' => 'required|integer|min:1',
-]);
+        'nama_pelanggan' => 'required|string',
+        'jenis_layanan' => 'required|string',
+        'harga_per_kilo' => 'required|integer',
+        'estimasi_waktu' => 'required|integer',
+    ]);
 
-$layanan = Layanan::findOrFail($id);
-$layanan->update([
-    'pelanggan_id' => $request->pelanggan_id,
-    'jenis_layanan' => $request->jenis_layanan,
-    'estimasi_waktu' => $request->estimasi_waktu,
-]);
+    $layanan->update([
+        'nama_pelanggan' => $request->nama_pelanggan,
+        'jenis_layanan' => $request->jenis_layanan,
+        'harga_per_kilo' => $request->harga_per_kilo,
+        'estimasi_waktu' => $request->estimasi_waktu,
+    ]);
 
-    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil diupdate.');
+    return redirect()->route('layanan.index')->with('success', 'Data layanan berhasil diperbarui.');
 }
 
-public function destroy($id)
-{
-    $layanan = Layanan::findOrFail($id);
-    $layanan->delete();
-    return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus.');
-}
+  // Hapus layanan
+    public function destroy($id)
+    {
+        $layanan = Layanan::findOrFail($id);
+        $layanan->delete();
+
+        return redirect()->route('layanan.index')->with('success', 'Layanan berhasil dihapus.');
+    }
 }

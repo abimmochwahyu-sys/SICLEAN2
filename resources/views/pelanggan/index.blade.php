@@ -12,7 +12,7 @@
             <th>Nama</th>
             <th>Alamat</th>
             <th>Telepon</th>
-            <th>Aksi</th>
+            <th>Aksi</th> 
         </tr>
     </thead>
     <tbody>
