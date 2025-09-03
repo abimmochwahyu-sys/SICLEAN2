@@ -196,43 +196,23 @@
 
     <div class="right">
         <div class="login-box">
-            <h2>WELCOME</h2>
-
+            <h2>REGISTER</h2>
             @if($errors->any())
-                <div class="error">{{ $errors->first() }}</div>
+            <div class="error">{{ $errors->first() }}</div>
             @endif
-            
-            @if(session('success'))
-                <div style="color: green; font-size:14px; margin-bottom:10px;">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if(session('success'))
-                <div style="color: green; font-size:14px; margin-bottom:10px;">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if($errors->any())
-                <div style="color: red; font-size:14px; margin-bottom:10px;">
-                    {{ $errors->first() }}
-                </div>
-            @endif
-
-            <form method="POST" action="{{ route('login.post') }}">
+            <form method="POST" action="{{ route('register.post') }}">
                 @csrf
-                <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
-                <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required
-                    autofocus>
-
+                <input type="text" name="name" placeholder="Nama Lengkap" value="{{ old('name') }}" required>
+                <input type="text" name="username" placeholder="Username" value="{{ old('username') }}" required>
+                <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
                 <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-                <br>
-                <br>
-                <div class="register-link">
-                    Belum mempunyai akun? <a href="{{ route('register') }}">Daftar</a>
-                </div>
+                <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required>
+                <button type="submit">Daftar</button>
             </form>
+            <br>
+            <div class="login-link">
+                Sudah punya akun? <a href="{{ route('login') }}">Login</a>
+            </div>
         </div>
     </div>
 </body>

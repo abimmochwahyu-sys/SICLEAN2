@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -12,24 +14,35 @@ class AuthController extends Controller
         return view('auth.login'); // File Blade nanti kita buat di resources/views/auth/login.blade.php
     }
 
-    public function login(Request $request)
-{
-    $credentials = $request->only('username', 'password');
-
-    if (Auth::attempt($credentials)) {
-        $user = Auth::user();
-
-        if ($user->role === 'admin') {
-            return redirect()->route('dashboard')->with('success', 'Selamat datang Admin!');
-        } else {
-            return redirect()->route('user.dashboard')->with('success', 'Selamat datang User!');
-        }
+    public function showRegisterForm()
+    {
+        return view('auth.register'); // karena file ada di resources/views/auth/register.blade.php
     }
 
-    return back()->withErrors([
-        'username' => 'Username atau password salah.',
-    ]);
-}
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            
+            // Redirect berdasarkan role
+            if (Auth::user()->role === 'admin') {
+                return redirect()->intended(Route ('adminDashboard'))->with('success', 'Selamat Anda Berhasil Login');
+            } else if (Auth::user()->role === 'user') {
+                return redirect()->intended(Route('userDashboard'))->with('success', 'Selamat Anda Berhasil Login');
+            } else{
+                return redirect()->intended('/login')->with('error', 'Username atau Password anda salah');
+            }
+        }
+
+        return back()->withErrors([
+            'email' => 'Email atau password salah.',
+        ])->withInput();
+    }
 
 
 
@@ -41,5 +54,26 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    // Proses register
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('dashboard')->with('success', 'Registrasi berhasil!');
     }
 }
