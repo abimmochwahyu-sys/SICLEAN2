@@ -24,6 +24,7 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
+            'username' => 'required|string',
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -35,7 +36,7 @@ class AuthController extends Controller
             } else if (Auth::user()->role === 'user') {
                 return redirect()->intended(Route('userDashboard'))->with('success', 'Selamat Anda Berhasil Login');
             } else{
-                return redirect()->intended('/login')->with('error', 'Username atau Password anda salah');
+                return redirect()->intended('/login')->with('error', 'Username atau Password atau username anda salah');
             }
         }
 
@@ -74,6 +75,6 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('dashboard')->with('success', 'Registrasi berhasil!');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil!');
     }
 }
